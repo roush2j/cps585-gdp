@@ -1,0 +1,26 @@
+\documentclass[aspectratio=169]{beamer}
+\usetheme{metropolis}           % Use metropolis theme
+
+\usepackage{amsmath}
+\newcommand{\vect}[1]{\boldsymbol{#1}}
+\newcommand{\expc}[1]{\left< #1 \right>}
+
+\title{Predicting Gross Domestic Product}
+\subtitle{Using Vector Autoregression}
+\date{\today}
+\author{Keith Siopes, John Roush, and Neeraj Rajesh}
+\institute{Central Michigan University}
+\begin{document}
+    
+    \maketitle
+
+    \section{Real GDP and Economic Indicators}
+    \input{tex/economics.tex}
+
+    \section{Autoregression}
+    \input{tex/autoregression.tex}
+    
+    \section{Models}
+    \input{tex/models.tex}
+
+\end{document}

@@ -1,0 +1,68 @@
+\begin{frame}{Scalar Autoregression}
+    A time-series model where each value depends linearly on the $p$ 
+    previous values:
+    \begin{align*} x_t
+        &= \beta + \sum_{i=1}^p \phi_i x_{t-i} + \epsilon_t \\
+        &= \beta + \phi_1 x_{t-1} + \phi_2 x_{t-2} + \ldots + \phi_p x_{t-p} + \epsilon_t
+    \end{align*}
+    where $\epsilon_t$ is a noise term with zero mean, constant variance,
+    and zero auto-covariance:
+    \begin{align*}
+        \expc{\epsilon_t} &= 0 \\
+        \expc{\epsilon_t^2} &= \sigma_\epsilon^2 \\
+        \expc{\epsilon_t \cdot \epsilon_{t-T}} &= 0 \text{ for } T \neq 0
+    \end{align*}
+     
+     AR is a useful model if $x_t$ is \emph{stationary}: statistical 
+     properties like mean and variance are independent of $t$.
+\end{frame}
+
+\begin{frame}{Vector Autoregression}
+    An $n$-variable model in which each variable depends linearly on the
+    $p$ past values of all variables:
+    \[ \vect{x}_t
+        = \vect{\beta} + \sum_{i=1}^{p} \vect{\phi}_{i} \cdot \vect{x}_{t-i} + \vect{\epsilon}_t
+     \]
+     where $\vect{x}_t$, $\vect{\beta}$, and $\vect{\epsilon}_t$ are now 
+     vectors of $n$ variables and $\vect{\phi}$ is now an $n \times n$ 
+     matrix of coefficients.
+     %NOTE and \epsilon must have a positive-definite covariance
+    
+    For example, a VAR(2) model of 2 variables $a$ and $b$:
+    \[ 
+        \begin{pmatrix} a_t \\ b_t \end{pmatrix} = 
+        \begin{pmatrix} \beta_{a} \\ \beta_{b} \end{pmatrix} +
+        \begin{pmatrix}
+            \phi_{1aa} & \phi_{1ab} \\
+            \phi_{1ba} & \phi_{1bb}
+        \end{pmatrix} \cdot 
+        \begin{pmatrix} a_{t-1} \\ b_{t-1} \end{pmatrix} + 
+        \begin{pmatrix}
+            \phi_{2aa} & \phi_{2ab} \\
+            \phi_{2ba} & \phi_{2bb}
+        \end{pmatrix} \cdot 
+        \begin{pmatrix} a_{t-2} \\ b_{t-2} \end{pmatrix} +
+        \begin{pmatrix} \epsilon_{a,t} \\ \epsilon_{b,t} \end{pmatrix}
+    \]
+\end{frame}
+
+\begin{frame}{Stationarity}
+    Autoregressive models only apply to \emph{stationary} time series:
+    the mean, variance, and autocovariance must be constant over time.
+        \begin{align*}
+            \expc{x_t} &= \mu \\
+            \expc{(x_t - \mu)^2} &= \sigma_x^2 \\
+            \expc{(x_t - \mu) \cdot (x_{t-T} - \mu)} &= C(T)
+        \end{align*}             
+    This condition is true only if the roots of the characteristic 
+    polynomial lie outside the unit circle:        
+    \[ 1 - \phi_1 z - \phi_2 z^2 - \ldots - \phi_p z^p = 0 \]
+    \[ \| z \| > 1 \]
+    
+    We can use the \textbf{Augmented Dickey-Fuller} test to check this 
+    assumption for a given model.
+\end{frame}
+
+\begin{frame}{Choosing the Order}
+    Akaike Information Criterion to choose $p$   
+\end{frame}

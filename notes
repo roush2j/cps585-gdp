@@ -1,0 +1,39 @@
+== data sources ==
+-   Fed. Reserve bank of St. Louis (https://research.stlouisfed.org/fred2)
+
+== variables ==
+*   real US GDP
+-   total US capacity utilization
+-   Interest rate on 3-month US treasury bills
+
+-   Outstanding mortgage debt
+-   Consumer Debt
+-   civilian labor force participation
+*   purchasing manager index (https://research.stlouisfed.org/fred2/series/NAPM)
+
+*   real personal income
+*   total non-farm employment
+-   industrial productivity
+-   real retail sales
+
+*   Real Personal Consumption Expenditure
+*   Government Consumption Expenditure
+*   Gross Private Domestic Investment
+
+== analysis ==
+-   look at cross correlations to choose variables
+    "forward selection", "backward selection"
+-   vector autoregression (linear):
+    Look at PMI and rGDP
+    Model is d/dt(log(PMI)) and d/dt(log(rGDP))  OR d/dt.log of PCE,GCE,RPI
+        Perform augmented dicky-fuller test to establish stationary
+        Use partial autocorrelation function to find # of lags to use
+        Also Akaike Information Criterion
+-   neural network forcasting (http://neural-forecasting.com/)
+    training indicators -> gdp works well for any given quarter
+    prediction (past indicators -> current gdp) is much tougher
+    
+== results ==
+-   Predicted rGDP in the future given the data up to the "present"
+    A measure of the correctness of this prediction over the last 30 years
+    Confidence bounds
