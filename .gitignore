@@ -1,5 +1,6 @@
 collab/
 references/
+*.log
 
 slides/mtheme
 slides/slides*
