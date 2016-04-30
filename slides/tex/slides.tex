@@ -2,6 +2,7 @@
 \usetheme{metropolis}           % Use metropolis theme
 
 \usepackage{amsmath}
+\usepackage{xcolor,colortbl}
 \newcommand{\vect}[1]{\boldsymbol{#1}}
 \newcommand{\expc}[1]{\left< #1 \right>}
 
@@ -22,5 +23,30 @@
     
     \section{Models}
     \input{tex/models.tex}
+    
+    \section{Conclusions}    
+        \begin{frame}{Conclusions}
+        \begin{itemize}
+        \item The model appears to have predicted past values accurately.
+        \item Economic growth is expected to continue at least for the next 4 quarters.
+        \item The 95\% confidence interval grows quite quickly and makes long-term predictions meaningless.
+        \item The outliers are of particular importance; recessionary periods
+            are the most useful economic event to forecast.
+        \end{itemize}
+    \end{frame}
+    
+    \begin{frame}{Possible further work}
+        \begin{itemize}
+        \item This model is very basic - there are many possible combinations
+            of variables to try with VAR.
+        \item Cross-validation (70\% training, 30\% testing)
+        \item Other model structures like Vector Error Correction or 
+            Vector Autoregressive Moving Average.
+        \end{itemize}
+    \end{frame}
+    
+    \begin{frame}
+        \begin{center} \huge \bf Questions? \end{center}
+    \end{frame}
 
 \end{document}

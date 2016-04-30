@@ -59,10 +59,19 @@
     \[ 1 - \phi_1 z - \phi_2 z^2 - \ldots - \phi_p z^p = 0 \]
     \[ \| z \| > 1 \]
     
-    We can use the \textbf{Augmented Dickey-Fuller} test to check this 
+    Use the \textbf{Augmented Dickey-Fuller} test to check this 
     assumption for a given model.
 \end{frame}
 
 \begin{frame}{Choosing the Order}
-    Akaike Information Criterion to choose $p$   
+    Choose the order $p$ with the \textbf{Akaike Information Criterion} - estimates the
+    \emph{relative} information lost when using a particular model to represent
+    a data set.
+    
+    Representing  a time series with $T$ samples using a VAR($p$) model of $n$ variables:
+    \[ \mathrm{AIC} = \ln|\Sigma| + 2\frac{p n^2 + n}{T} \]
+    where $\Sigma$ is the covariance matrix of the noise terms $\vect{\epsilon}$:
+    \[ \Sigma = \frac{1}{T} \sum_{t=1}^T \vect{\epsilon} \times \vect{\epsilon} \]
+    
+    AIC balances fit quality against model complexity.
 \end{frame}
