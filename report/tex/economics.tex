@@ -1,0 +1,76 @@
+\section{GDP and Other Economic Indicators}
+
+    \define{Gross Domestic Product} measures the value of all goods and
+    services produced in a country during a fixed period.  GDP is traditionally defined
+    as the sum of consumption expenditures, investments, and the trade balance (the
+    difference between export and import) \cite{samuelson}:
+    \[ GDP = consumption + investment + (exports - imports) \]
+    Consumption and investment are further divided between private
+    interests and government activities.
+
+    \define{Real GDP} corrects for inflation (measured independently) to make
+    GDP comparable from year to year.  We will naturally be forecasting real GDP,
+    and unless otherwise specified ``GDP'' in this paper can be assumed to 
+    mean ``real GDP''.
+
+    There is a lot of complexity hidden in succinct definition above.
+    Consumption, Investment, and Trade are umbrella terms covering many 
+    variables.  Private consumption, for example, includes Retail Sales and 
+    Private Consumption Index, each an important economic indicator in its own 
+    right.  We shall use some of these other variables in our model,
+    so without going into too much detail we name a few and sketch their definitions
+    in section \ref{sec:indicators} below.
+
+\subsection{Other Economic Indicators} \label{sec:indicators}
+
+    \define{Real Private Consumption Expenditures} is the main component of 
+    Private Consumption.  A key component of rPCE is the \define{Private 
+    Consumption Index}: the total amount of money spent on goods and 
+    services by private consumers. Also important is \define{Gross Retail 
+    Sales}: the amount of money spent on \emph{retail} goods and services by 
+    private consumers stores, notable as an indicator of faith in the currency. 
+
+    \define{Gross Private Domestic Investment} is the main component of Private 
+    Investment.  It is a particularly important component of GDP because it 
+    provides an indicator of future capital availability in the economy. GPDI 
+    includes 3 types of investment:
+    \begin{itemize}
+        \item \define{Capital Investment} is expenditures by firms on capital 
+        such as tools, machinery, and factories. 
+        \item \define{Residential Investment} is expenditures on residential 
+        structures and residential equipment that is owned by landlords and 
+        rented to tenants. 
+        \item \define{Inventory Investment} is change of company inventories 
+        during the survey period.
+    \end{itemize}
+        
+    \define{Real Government Consumption Expenditure} is a major metric of 
+    government spending.  It covers government purchases of goods and services 
+    which is not a transfer payment of money collected in taxation from one 
+    group in society to another (such as welfare). Much day-to-day health and 
+    education expenditure counts as government consumption. 
+
+    There are many more major and minor metrics that could be considered:
+    \begin{itemize}
+        \item \define{Outstanding Mortgage Debt} is the amount of mortgage debt held by the
+        private sector. 
+        \item \define{Consumer Debt} is short term debt used to fund consumption and 
+        includes debts incurred on purchase of goods that are consumable and/or do 
+        not appreciate. 
+        \item \define{Civilian Labor Force Participation}
+        is the fraction of the eligible civilian labor force (non-military, 
+        non-institutionalized adults) that is employed or seeking employment.
+        \item \define{Non-farm Employment} employment by goods, construction 
+        and manufacturing companies in the US. It doesn't include private household 
+        employees or nonprofit organization employees. 
+        \item \define{Production Manager Index} is based on surveys to businesses of five 
+        variables: new orders, inventory levels, production, supplier deliveries 
+        and the employment environment. 
+        \item \define{Real Personal Income} is the average income of private individuals 
+        after adjusting for inflation. 
+        \item \define{Industrial Production Index} measures the output from the 
+        manufacturing, mining, electric and gas industries.
+    \end{itemize}
+    
+    While we tested models built on several combinations of these variables, in this
+    paper we will focus solely on a model using rPCE, rGCE, and GPDI.

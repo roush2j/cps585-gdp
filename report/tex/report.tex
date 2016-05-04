@@ -1,0 +1,44 @@
+\documentclass[11pt,letterpaper]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[pdfborder={0 0 0}]{hyperref}
+\usepackage{color}
+\usepackage{xcolor,colortbl}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{subcaption}
+
+\newcommand{\define}[1]{\textbf{\textit{#1}}}
+\newcommand{\needcite}{\textcolor{red}{\tiny [CITATION NEEDED]}}
+
+\date{}
+\title{Predicting Gross Domestic Product}
+\subtitle{Using Vector Autoregression}
+\author{Neeraj Rajesh, John Roush, and Keith Siopes \\
+		\\
+		Department of Computer Science \\
+		Central Michigan University \\
+		Mount Pleasant, Michigan  48859 \\
+		\{rajes1n, roush2j, siope1kd\}@cmich.edu}
+\begin{document} 
+
+\maketitle 
+
+\input{tex/intro.tex}
+
+\input{tex/economics.tex}
+
+\input{tex/survey.tex}
+
+\input{tex/theory.tex}
+
+\input{tex/model.tex}
+
+\input{tex/results.tex}
+
+\bibliographystyle{plain}
+\bibliography{sources}
+
+\end{document}

@@ -1,0 +1,153 @@
+\section{Autoregression Models} \label{sec:theory}
+\newcommand{\vect}[1]{\boldsymbol{#1}}
+\newcommand{\expc}[1]{\left< #1 \right>}
+
+To understand the procedure, we first provide the theory and conceptual 
+framework behind Vector Autoregression as well as preliminary concepts, 
+starting from the fundamental level.
+
+\subsection{Scalar Autoregression} \label{sec:armodel}
+
+    A \define{Scalar Autoregression} is a model wherein a time-series variable $x_t$
+    is expressed as a linear function of previous values $x_{t-1}$, $x_{t-2}$, etc.
+    \begin{align} \label{eq:ardef}
+        x_t 
+        &= \beta + \sum_{i=1}^p \phi_i x_{t-i} + \epsilon_t \\
+        &= \beta + \phi_1 x_{t-1} + \phi_2 x_{t-2} + \ldots + \phi_p x_{t-p} + \epsilon_t
+    \end{align}
+    Here $\beta$ and $\phi_{i=1,\ldots,p}$ are constant parameters and 
+    $p$ is the \define{order} of the model - usually quite small in practical 
+    models.  The last term, $\epsilon_t$, is a stochastic term that represents
+    uncertainty in the series.  It need not be truly random, but it must have 
+    certain statistical properties \cite{zivot}:
+    \begin{align} 
+        \label{eq:stochastic1} \expc{\epsilon_t} &= 0 \\
+        \label{eq:stochastic2}  \expc{\epsilon_t^2} &= \sigma_\epsilon^2 \\
+        \label{eq:stochastic3} \expc{\epsilon_t \cdot \epsilon_{t-T}} &= 0 \text{ for } T \neq 0
+    \end{align}
+    The stochastic contribution to the time series $\epsilon$ must have zero 
+    mean and a constant (independent of $t$) variance.  In addition, the value
+    of $\epsilon_t$ must be independent of (zero auto-covariance with) previous values
+    $\epsilon_{t-1}$, $\epsilon_{t-2}$, etc.  Thus the entire causal (commonly 
+    phrased as ``backward-looking'') behavior of $x$ is captured by the 
+    coefficients $\phi_i$.
+    
+    In order for the time-evolution of the series to be stable, certain 
+    restrictions are necessary on these coefficients.  
+    We can express them as a polynomial:
+    \begin{equation} \label{eq:arpoly}
+        P(z) = 1 - \phi_1 z - \phi_2 z^2 - \ldots - \phi_p z^p 
+    \end{equation}
+    The condition for stability of the time series is that all roots of this 
+    polynomial have magnitude greater than 1 \cite{zivot}:
+    \begin{equation} \label{eq:arstability}
+        P(z) = 0 \implies \| z \| > 1 
+    \end{equation}
+    
+    If this condition is met, the time series $x$ has the essential property of
+    \define{weakly stationarity.}  Informally, this means that its statistical
+    properties are well-defined and constant.  Formally, it means that
+    the mean and variance of $x_t$ are independent of $t$, and that the auto-covariance
+    of $x_t$ with time-lagged values $x_{t-T}$ depend only on the time lag $T$ \cite{juselius}:
+    \begin{align} \label{eq:stationarity}
+        \expc{x_t} &= \mu \\
+        \expc{(x_t - \mu)^2} &= \sigma_x^2 \\
+        \expc{(x_t - \mu) \cdot (x_{t-T} - \mu)} &= C(T)
+    \end{align}
+    
+    If the condition in Eq. (\ref{eq:arstability}) is \emph{not} met then
+    the time series $x$ may not be well-defined (i.e. it may diverge to infinity)
+    in some cases \cite{dickey}.
+
+\subsection{Vector Autoregression}
+
+    A \define{Vector Autoregression} in $n$ variables is a straightforward 
+    extension to the scalar autoregression model.  Each of the variables
+    is time series, and each depends linearly on the previous values of \emph{all}
+    of the variables:
+    \begin{equation} \label{eq:vardef}
+        \vect{x}_t
+        = \vect{\beta} + \sum_{i=1}^{p} \vect{\phi}_{i} \cdot \vect{x}_{t-i} + \vect{\epsilon}_t
+    \end{equation}
+    Here the $n$ variables are expressed as a vector $\vect{x}_t$, and likewise 
+    for the constant offsets $\vect{\beta}$ and stochastic variables 
+    $\vect{\epsilon}_t$.  The causal coefficients $\vect{\phi}$ are $n \times n$ 
+    matrices.
+    
+    For example, a VAR(2) model of 3 variables $a$, $b$, and $c$:
+    \[ 
+        \begin{pmatrix} a_t \\ b_t \\ c_t \end{pmatrix} = 
+        \begin{pmatrix} \beta_{a} \\ \beta_{b} \\ \beta_{c} \end{pmatrix} +
+        \begin{pmatrix}
+            \phi_{1aa} & \phi_{1ab} & \phi_{1ac} \\
+            \phi_{1ba} & \phi_{1bb} & \phi_{1bc} \\
+            \phi_{1ca} & \phi_{1cb} & \phi_{1cc}
+        \end{pmatrix} \cdot 
+        \begin{pmatrix} a_{t-1} \\ b_{t-1} \\ c_{t-1} \end{pmatrix} + 
+        \begin{pmatrix}
+            \phi_{2aa} & \phi_{2ab} & \phi_{2ac} \\
+            \phi_{2ba} & \phi_{2bb} & \phi_{2bc} \\
+            \phi_{2ca} & \phi_{2cb} & \phi_{2cc}
+        \end{pmatrix} \cdot 
+        \begin{pmatrix} a_{t-2} \\ b_{t-2} \\ c_{t-2} \end{pmatrix} +
+        \begin{pmatrix} \epsilon_{a,t} \\ \epsilon_{b,t} \\ \epsilon_{c,t} \end{pmatrix}
+    \]
+    
+    For a vector autoregression model, the coefficient polynomial from Eq. (\ref{eq:arpoly})
+    becomes a matrix expression, and the roots in stability condition (\ref{eq:arstability}) are
+    defined by the \emph{determinant}:
+    \begin{equation} \label{eq:varstability}
+        \text{det}(\vect{P}(z)) = 0 \implies \| z \| > 1 
+    \end{equation}
+
+\subsection{Model Construction and Verification} \label{sec:modelcons}
+
+    Given a time-series data set of variables $\vect{x}_t$, we intend 
+    to use the method of \define{ordinary least-squares} to fit the model parameters
+    $\vect{\beta}$ and $\vect{\phi}$.  OLS is consistent but presents problems when
+    the variables are not stationary, and in particular when the roots of the 
+    coefficient polynomial Eq. (\ref{eq:arpoly}) are close to or equal to 1 \cite{dickey}.
+    
+    Dickey and Fuller introduced a test for this particular pathology in 
+    scalar autoregressive models with order of 1 \cite{dickey}. The test allows 
+    one to formally accept or reject the null hypothesis that the coefficients 
+    of a model have a unit root. An augmented version, accommodating arbitrary 
+    order $p$, is commonly used to gauge the suitability of a scalar AR model 
+    post-facto \cite{juselius}.  
+    
+    For each variable in our full model, we construct a scalar AR model for that
+    variable via OLS.  We then perform the \define{Augmented Dickey-Fuller Test}, 
+    producing a statistic $\hat{p_\mu}$ and a confidence bound to reject 
+    the existence of a unit root in the model for that variable.
+    If a unit root \emph{does} exist then we conclude that the
+    variable displays pathological behavior (and is obviously not stationary).
+    Such variables are must be rejected or transformed until they pass the test.
+    
+    If no unit root exists for any of the variables tested, we can proceed to build
+    a full VAR model using OLS.
+
+\subsection{Model Selection} \label{sec:modelorder}
+
+    For a complex time series it is helpful to have an objective method
+    for choosing the order $p$ of our VAR model.  Brüggemann and Lütkepohl 
+    discuss several common procedures for this \cite{briiggemann}. We have 
+    opted to use \define{Akaike Information Criterion}, which has utility 
+    beyond simply choosing $p$.  
+    
+    Informally, AIC compares the residuals of two models (any models; it is not 
+    limited to VAR) and estimates the relative information loss of representing 
+    the original data using each model.  It weighs the quality of fit 
+    (covariance of residuals) against the complexity (number of free 
+    parameters). The model with the  smallest AIC value (and hence lowest 
+    information loss) is considered superior.
+
+    Formally, the AIC for a time series $\vect{x}_t$ with $n$ 
+    variables and $T$ samples, represented using a VAR($p$) model $\vect{m}_t$, is:
+        \begin{equation} \mathrm{AIC} = \ln|\Sigma| + 2\frac{p n^2 + n}{T} \end{equation}
+    where $\Sigma$ is the covariance matrix of the residual terms:
+        \begin{equation} \Sigma = \frac{1}{T} \sum_{t=1}^T (\vect{m}_t - \vect{x}_t) \times (\vect{m}_t - \vect{x}_t) \end{equation}
+
+    To choose the optimal order $p$, we can construct several candidate models
+    with different orders and compare them with AIC.  We could also (but in this paper do
+    not) use AIC to guide the selection of which variables from section \ref{sec:indicators}
+    to use in the model.

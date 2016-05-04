@@ -1,0 +1,33 @@
+\begin{abstract}
+    We discuss various economic indicators and the theory of predicting them
+    using autoregressive models.  We then construct a VAR(4) model on a 
+    small selection of indicators to predict Gross Domestic Product.  
+    It matches historical GDP data well and predicts consistent future growth,
+    but we conclude that it is too simple to have compelling predictive power.
+\end{abstract}
+
+\section{Introduction}
+    Nobel laureate Paul A. Samuelson and economist William Nordhaus said that
+    \begin{quote} 
+        GDP and the rest of the national income accounts may seem to be arcane 
+        concepts, [but] they are truly among the great inventions of the 
+        twentieth century \cite{samuelson}.
+    \end{quote}
+    
+    \define{Gross Domestic Product} is an overall estimate of the size of an 
+    economy, in terms of total productive output. As such, it is of great 
+    importance to policy makers and central banks to know its trend and foresee 
+    possible changes.  This facilitates accurate assessment of the future state 
+    of the economy - whether it be heading toward expansion or contraction - 
+    such that preemptive actions can be taken as appropriate. Reliable 
+    forecasting of GDP is a very important tool in the macro-economics toolbox.
+
+    Unfortunately, national economies are profoundly complex and it is not 
+    trivial to model them accurately, let alone predict their behavior. Like 
+    weather forecasts, GDP forecasts are inherently uncertain and 
+    inevitably short-term.
+
+    We look briefly at some previous work on the subject of predicting GDP and 
+    then attempt to do the same.  We use a VAR(4) model on a small selection of 
+    economic indicators.  The results are consistent but not particularly 
+    insightful and we conclude that more sophisticated models are needed.
